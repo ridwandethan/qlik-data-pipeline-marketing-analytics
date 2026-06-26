@@ -1,0 +1,70 @@
+// ============================================================================
+// PRODUCTION DATA PIPELINE ARCHITECTURE FOR MULTI-SOURCE MARKETING ANALYTICS
+// TARGET ENTERPRISE: NUTRAMEG (HEALTH-TECH SUBSCRIPTION BUSINESS MODEL)
+// AUTHOR: RIDWAN DETHAN
+// VERSION: 1.0.0
+// ============================================================================
+
+
+// ============================================================================
+// SECTION 1: GLOBAL DATA DICTIONARY & MAPPING TABLES
+// ============================================================================
+// Objective: Standardize messy, unstructured geographical codes from third-party 
+// Marketing APIs (Meta & Google Ads) into clean, unified English country names.
+
+Country_Map:
+MAPPING LOAD * INLINE [
+    OldValue, NewValue
+    'ID', 'Indonesia'
+    'IDN', 'Indonesia'
+    'USA', 'United States'
+    'UK', 'United Kingdom'
+];
+
+
+// ============================================================================
+// SECTION 2: RAW DATA INGESTION & PIPELINE (EXTRACT LAYER)
+// ============================================================================
+// Objective: Ingest unstructured JSON responses directly simulated from 
+// Marketing API endpoints utilizing high-performance in-memory INLINE tables.
+
+Raw_API_Table:
+LOAD * INLINE [
+    campaign_id, api_response_json
+    CMP_881, '{"platform":"Meta", "spend":500, "metrics":{"clicks":120, "country":"ID"}}'
+    CMP_882, '{"platform":"Google", "spend":750, "metrics":{"clicks":340, "country":"USA"}}'
+    CMP_883, '{"platform":"Meta", "spend":200, "metrics":{"clicks":90, "country":"IDN"}}'
+];
+
+
+// ============================================================================
+// SECTION 3: TRANSFORM & TRANSFORMATION LAYER (JSON FLATTENING)
+// ============================================================================
+// Objective: Parse nested JSON string values, execute data type conversion,
+// and enforce data cleansing via hash-lookup (ApplyMap) directly in RAM.
+
+Clean_Marketing_Table:
+LOAD
+    campaign_id,
+    
+    // 1. Flatten platform string from JSON object
+    TextBetween(api_response_json, '"platform":"', '"') as AdPlatform,
+    
+    // 2. Parse and enforce numeric data type for ad expenses
+    Num(TextBetween(api_response_json, '"spend":', ',')) as AdSpend,
+    
+    // 3. Extract sub-nested performance clicks metrics
+    Num(TextBetween(api_response_json, '"clicks":', ',')) as AdClicks,
+    
+    // 4. Transform messy country strings into optimized values via Hash Table lookups
+    ApplyMap('Country_Map', TextBetween(api_response_json, '"country":"', '"'), 'Unknown Country') as CleanCountry
+RESIDENT Raw_API_Table;
+
+
+// ============================================================================
+// SECTION 4: RESOURCE OPTIMIZATION & GOVERNANCE
+// ============================================================================
+// Objective: Explicitly drop raw staging tables to free up cache space inside 
+// the Qlik Associative Engine, keeping the final data model lean and performant.
+
+DROP TABLE Raw_API_Table;

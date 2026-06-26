@@ -5,46 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ridwan Dethan | Senior Systems Architect & Founder</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; background: #fafafa; }
-        h1 { margin-bottom: 5px; color: #111; }
-        .subtitle { font-size: 1.2rem; color: #666; margin-top: 0; }
-        .links { margin: 20px 0; }
-        .links a { display: inline-block; margin-right: 15px; color: #0969da; text-decoration: none; font-weight: bold; }
-        .links a:hover { text-decoration: underline; }
-        .card { background: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 20px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .card h3 { margin-top: 0; color: #0969da; }
-        .badge { background: #eaeef2; color: #24292f; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 500; margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #7ee787;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 0 25px;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+        }
+        header {
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-top: 0;
+            font-weight: 400;
+        }
+        .links {
+            margin: 25px 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: opacity 0.2s ease;
+        }
+        .links a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #f0f6fc;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 45px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: #8b949e;
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card p {
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+        .badge-container {
+            margin: 20px 0 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .badge {
+            background: rgba(56, 139, 253, 0.15);
+            color: var(--accent-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 139, 253, 0.3);
+        }
+        .badge.tech {
+            background: rgba(126, 231, 135, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(126, 231, 135, 0.2);
+        }
+        .cta-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+        .grid-expertise {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .expertise-item {
+            background: rgba(22, 27, 34, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .expertise-item strong {
+            color: #f0f6fc;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .expertise-item p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
 
-    <h1>Ridwan Dethan</h1>
-    <p class="subtitle">Founder at Terrasense | Senior Systems Architect & Data Engineer</p>
+    <header>
+        <h1>Ridwan Dethan</h1>
+        <p class="subtitle">Founder at Terrasense &bull; Senior Systems Architect &amp; Data Engineer</p>
+        
+        <div class="links">
+            <a href="https://github.com" target="_blank">
+                <svg style="margin-right:6px;" height="18" width="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                GitHub Profile
+            </a>
+            <a href="mailto:admin@ridwandethan.me">✉️ admin@ridwandethan.me</a>
+            <a href="https://terrasense.biz.id" target="_blank">🌐 Terrasense IoT</a>
+        </div>
+    </header>
+
+    <h2>Featured Enterprise Architecture Portfolio</h2>
     
-    <div class="links">
-        <a href="https://github.com" target="_blank">🐙 GitHub Profile</a>
-        <a href="mailto:admin@ridwandethan.me">✉️ Contact Email</a>
-        <a href="https://terrasense.biz.id" target="_blank">🌐 Terrasense IoT</a>
-    </div>
-
-    <hr style="border: 0; border-top: 1px solid #d0d7de; margin: 30px 0;">
-
-    <h2>Featured Portfolio for Nutrameg</h2>
     <div class="card">
         <h3>📊 qlik-data-pipeline-marketing-analytics</h3>
-        <p>Production-grade end-to-end Qlik Sense data pipeline optimized for high-scale health-tech e-commerce metrics. Features advanced in-memory JSON flattening (Meta/Google Ads API), Incremental Load architecture, and Star-Schema configuration completely free of Synthetic Keys.</p>
-        <div>
+        <p>A production-grade, asynchronous end-to-end Qlik Sense data integration pipeline optimized for high-scale health-tech subscription commerce. This framework decouples multi-source data ingestion streams to keep warehouse query structures highly performant.</p>
+        
+        <div class="badge-container">
             <span class="badge">Qlik Sense Cloud</span>
             <span class="badge">Data Engineering</span>
             <span class="badge">JSON Flattening</span>
-            <span class="badge">ETL Pipeline</span>
+            <span class="badge">3-Layer QVD Framework</span>
+            <span class="badge">Data Governance</span>
         </div>
-        <br>
-        <a href="https://github.com/qlik-data-pipeline-marketing-analytics" target="_blank" style="color: #0969da; text-decoration: none; font-weight: bold;">View Raw Script Architecture &rarr;</a>
+        
+        <p style="font-size: 0.9rem; color: var(--text-muted); border-left: 3px solid var(--accent-blue); padding-left: 15px; margin: 15px 0;">
+            <strong>Core Challenge Solved:</strong> Implemented optimized hash-lookup mapping models (MAPPING LOAD / ApplyMap) inside the Qlik Associative Engine to flatten nested, messy marketing JSON arrays dynamically, completely neutralizing Synthetic Keys via strict QUALIFY states.
+        </p>
+
+        <a href="https://github.com/qlik-data-pipeline-marketing-analytics" target="_blank" class="cta-link">Review Production Script &rarr;</a>
     </div>
 
-    <h2>Core Expertise</h2>
-    <p>Deep specialization in Backend Services, Database Tuning, IoT Infrastructure, DePIN Ecosystems, and LoRaWAN networks. Fluent in architectural orchestration using Rust, Go, C#, Python, Delphi, and Cloud Analytics stacks.</p>
+    <h2>Core Technological Expertise</h2>
+    <p>Over two decades of designing, building, and launching distributed architectures, industrial solutions, and telemetry frameworks.</p>
+    
+    <div class="grid-expertise">
+        <div class="expertise-item">
+            <strong>Data Architectures</strong>
+            <p>PostgreSQL, Google BigQuery, SQL Optimization, Qlik ETL, In-Memory Caching.</p>
+        </div>
+        <div class="expertise-item">
+            <strong>Systems Engineering</strong>
+            <p>Rust, Go, Python, C#, Delphi, AssemblyScript, Low-level Software Design.</p>
+        </div>
+        <div class="expertise-item">
+            <strong>IoT &amp; Infrastructure</strong>
+            <p>DePIN Ecosystems, LoRaWAN Networks, Telemetry Streams, AWS Management.</p>
+        </div>
+    </div>
 
 </body>
 </html>
